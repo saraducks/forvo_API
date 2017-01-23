@@ -17,3 +17,5 @@
   import pygame
   pygame.init()
   
+##How to run?
+   python file_name.py word_to_pronounce

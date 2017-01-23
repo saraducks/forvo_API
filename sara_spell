@@ -24,7 +24,8 @@ class forvo:                        # get the url and retrieve the pronunciation
             pygame.mixer.music.set_volume(5.0)                                 #set the pygame volume to 5
             pygame.mixer.music.load('filename.ogg')                            # load the file to play
             pygame.mixer.music.play()
-            time.sleep(60)
+            time.sleep(60)                                                     # waits for the time to get done before
+                                                                               # closes python file
 
         except:                                                                # url error
             print "Check url path"

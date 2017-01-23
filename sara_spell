@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+import urllib2                      # import urllib2, urllib for opening and retriving the .ogg file
+import sys
+import urllib
+import json                         # Json format
+import pygame
+import time
+pygame.init()                       #Pygame will initialize here
+pygame.mixer.init()
+
+class forvo:                        # get the url and retrieve the pronunciation file
+    def get_credentials(self, get_key, action, my_word):
+        self.API = get_key
+        self.action = action
+        self.word = my_word
+
+        url = 'https://apifree.forvo.com/key/'+ self.API +'/format/json/action/'+self.action+'/word/'+self.word+'/language/en'
+        try:
+            request = urllib2.urlopen(url)                                     # get the url, open the url
+            get_json_file = json.load(request)
+            result_ogg_link = get_json_file["items"][0]['pathogg']             # get the result, load as JSON
+            storefile = urllib.urlretrieve(result_ogg_link,'filename.ogg')     # store the ogg file as filename.ogg
+            pygame.mixer.music.set_volume(5.0)                                 #set the pygame volume to 5
+            pygame.mixer.music.load('filename.ogg')                            # load the file to play
+            pygame.mixer.music.play()
+            time.sleep(60)
+
+        except:                                                                # url error
+            print "Check url path"
+
+f = forvo()
+word = sys.argv[1]
+f.get_credentials('you_API_key', 'word-pronunciations', word )
+
+
